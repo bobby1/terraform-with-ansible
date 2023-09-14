@@ -61,7 +61,7 @@ for example:
  
   or
   
-  ssh -o StrictHostKeyChecking=accept-new  ubuntu@ec2-54-92-22-20.compute-1.amazonaws.com    
+  ssh -o StrictHostKeyChecking=accept-new ubuntu@ec2-54-92-22-20.compute-1.amazonaws.com    
   to automatically accept the ssh key
 
 * To install applications and files on the new instances, using Ansible.
