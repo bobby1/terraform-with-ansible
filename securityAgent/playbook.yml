@@ -1,0 +1,51 @@
+###======================================================================================
+### Copyright (c) 2023, Bobby Wen, All Rights Reserved 
+### Use of this source code is governed by a MIT-style
+### license that can be found at https://en.wikipedia.org/wiki/MIT_License.
+### Project:		Cloud Software Group challenge
+### Class:			Ansible playbook
+### Purpose:    Push security agent to server group
+### Usage:			Ansible-playbook playbook.yml
+### Pre-requisits:	AWS ssh access key, AWS EC2 instance IP|URL (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html)
+###                 Ansible (https://www.ansible.com/)
+### Beware:     This playbook is not idempotent, it will install security agent every time it runs.
+###             Sudo privilege is required to run this playbook
+###             clients are configure in groups in /etc/ansible/hosts of ansible server
+###             The client server ssh key fingerprint must be added the known_hosts file of ansible user, by ssh to the client server first
+###
+### Developer: 	Bobby Wen, bobby@wen.org
+### Creation date:	20230913_2246
+###====================================================================================== 
+
+- hosts: awsTest 
+  remote_user: ubuntu
+  become: true
+  become_method: sudo
+
+  tasks:
+    - name: Creates directory if it does not exist
+      file:
+        path: /opt/csg_security_agent
+        state: directory
+
+    - name: Copy installer file if it does not exist
+      copy:
+        src: /home/b1/Documents/development/sandbox/terraform/CloudSoftwareGroup/securityAgent/security_agent_installer_linux_amd64_v1.0.0.sh
+        dest: /opt/csg_security_agent/security_agent_installer.sh
+        mode: '0750'
+      
+    - name: copy config file if it is not current
+      copy:
+        src: /home/b1/Documents/development/sandbox/terraform/CloudSoftwareGroup/securityAgent/security_agent_config.conf
+        dest: /opt/csg_security_agent/
+        mode: '0640'
+
+    - name: Replace configuration file unique token
+      replace:
+        path: /opt/csg_security_agent/security_agent_config.conf
+        regexp: '<add_unique_token_here>'
+        replace: 'CSG_$h4p3#7e'
+
+    - name: Install securityAgent
+      shell:
+        cmd:  /opt/csg_security_agent/security_agent_installer.sh --config /opt/csg_security_agent/security_agent_config.conf --token CSG_$h4p3#7  # run command to install agent
