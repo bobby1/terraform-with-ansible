@@ -35,7 +35,7 @@ To use this code base, AWS cli, Terraform and Ansible are required to be install
 
    * An OpenSSH key-pair must be available to upload to the new environment
 
-## How to use
+## How to use and maintain
 
 * To create the example environment using Terraform, in the SDLC directory for the environment to deploy, for example, dev
 
