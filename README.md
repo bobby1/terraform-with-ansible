@@ -31,13 +31,13 @@ To use this code base, AWS, Terraform and Ansible are required to be installed l
   
    Terraform by HashiCorp (https://www.terraform.io/)
   
-    Ansible (https://www.ansible.com/)
+   Ansible (https://www.ansible.com/)
 
-An OpenSSH key-pair must be available to upload with the new environment
+An OpenSSH key-pair must be available to upload to the new environment
 
 ## How to use
 
-* To create the example environment,  in the SDLC directory for the environment to deploy, for example, dev
+* To create the example environment using Terraform, in the SDLC directory for the environment to deploy, for example, dev
 
   $ terraform init
 
@@ -50,13 +50,30 @@ An OpenSSH key-pair must be available to upload with the new environment
   $ terraform apply
   
  Once the server instance are created, Terraform will output the server name and IP.  You can retrieve this output at any time after creating the instances by running 
-  
+ 
   $ terraform output
   
 Once you have the new instance DNS name information, connect to each instance to ensure your connection and ssh keys work.
 
 for example:  
-  $  ssh ubuntu@ec2-54-92-22-20.compute-1.amazonaws.com and accept the server ssh key into the ssh known-hosts
-    or
-  $  ssh -o StrictHostKeyChecking=accept-new  ubuntu@ec2-54-92-222-205.compute-1.amazonaws.com to automatically accept the ssh key
+  ssh ubuntu@ec2-54-92-22-20.compute-1.amazonaws.com 
+  and accept the server ssh key into the ssh known-hosts
+ 
+  or
+  
+  ssh -o StrictHostKeyChecking=accept-new  ubuntu@ec2-54-92-222-205.compute-1.amazonaws.com    
+  to automatically accept the ssh key
 
+* To install applications and files on the new instances, using Ansible.
+
+  **   add the server instance to the ansible host list at/etc/ansible/hosts.
+
+  ** go to the directory containing the Ansible playbook
+
+     $ ansible-playbook playbook.yml
+
+     Ansible will output a log of the  tasks.  In the example playbook, Ansible copies an application and configuration files to all new instances, and runs the application to install some new software.
+
+  The application also creates a blank cookie as a local audit trail for the activity, and logs the event to syslog.
+
+  
