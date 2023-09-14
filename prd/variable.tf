@@ -37,10 +37,10 @@ variable "aws_instance_id" {
   description = "AWS machine Image ID for deployment"
   type        = map(string)
   default = {
-    us-east-1 = "ami-053b0d53c279acc90"
-    us-east-2 = "ami-024e6efaf93d85776"
-    us-west-1 = "ami-0f8e81a3da6e2510a"
-    us-west-2 = "ami-03f65b8614a860c29"
+    us-east-1 = "ami-0261755bbcb8c4a84"
+    us-east-2 = "ami-0430580de6244e02e"
+    us-west-1 = "ami-04d1dcfb793f6fa37"
+    us-west-2 = "ami-0c65adc9a5c1b5d7c"
   }
 }
 
