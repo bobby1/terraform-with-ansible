@@ -25,15 +25,15 @@ This code is a basic demonstration of ways to create Structured Design Life Cycl
 
 ## Pre-requisites
 
-To use this code base, AWS, Terraform and Ansible are required to be installed locally on the server.
+To use this code base, AWS cli, Terraform and Ansible are required to be installed locally on the server.
 
-   AWS access configuration(https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
+   * AWS cli access configuration (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
   
-   Terraform by HashiCorp (https://www.terraform.io/)
+   * Terraform by HashiCorp (https://www.terraform.io/)
   
-   Ansible (https://www.ansible.com/)
+   * Ansible (https://www.ansible.com/)
 
-An OpenSSH key-pair must be available to upload to the new environment
+   * An OpenSSH key-pair must be available to upload to the new environment
 
 ## How to use
 
@@ -50,8 +50,8 @@ An OpenSSH key-pair must be available to upload to the new environment
   $ terraform apply
   
  Once the server instance is created, terraform will output the server’s name and IP.  You can retrieve this output at any time after creating the instances by running 
- 
-  $ terraform output
+  
+   $ terraform output
   
 Once you have the new instance DNS name information, connect to each instance to ensure your connection and ssh keys work.
 
@@ -61,7 +61,7 @@ for example:
  
   or
   
-  ssh -o StrictHostKeyChecking=accept-new  ubuntu@ec2-54-92-222-205.compute-1.amazonaws.com    
+  ssh -o StrictHostKeyChecking=accept-new  ubuntu@ec2-54-92-22-20.compute-1.amazonaws.com    
   to automatically accept the ssh key
 
 * To install applications and files on the new instances, using Ansible.
@@ -93,9 +93,8 @@ or
   to avoid duplicate efforts. This not only helps everyone
   know what is going on, but it also helps save time and effort if we decide
   some changes are needed.
-*
 
-## Authors
+## Author
 
 Terraform-with-ansible was created by [Bobby Wen] (https://github.com/bobby1) as a primer to Terraform and ansible.
 
