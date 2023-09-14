@@ -21,7 +21,7 @@ This code is a basic demonstration of ways to create Structured Design Life Cycl
 
   ** Scripts on servers create a local trail of activity as well as log to the syslog or remote syslogger.
 
-* Easy to use:  All code contains a banner with project, usage, pre-requisite and beware sections.  In addition, tags to identify the project, environment and other identifiable information are added where possible.
+* Easy to use and maintain:  All code contains a banner with project, usage, pre-requisite and beware sections.  In addition, tags to identify the project, environment and other identifiable information are added where possible.
 
 ## Pre-requisites
 
@@ -35,7 +35,7 @@ To use this code base, AWS cli, Terraform and Ansible are required to be install
 
    * An OpenSSH key-pair must be available to upload to the new environment
 
-## How to use and maintain
+## How to use
 
 * To create the example environment using Terraform, in the SDLC directory for the environment to deploy, for example, dev
 
