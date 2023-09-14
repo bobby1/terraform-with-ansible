@@ -81,10 +81,9 @@ variable "ingress_cidr_blocks" {
   description = "CIDR blocks to allow in the security group"
   type        = map(list(string))
   default = {
-    ### 67.174.209.57/32 is bobby's home IP address DEBUG
-    # dev = ["67.174.209.57/32", ]          ### DEBUG
-    dev = ["0.0.0.0/0", ]
-    ### 54.86.126.30/24 is cloud.com's IP address  ### DEBUG
+    ### 67.174.209.57/32 is an access IP address DEBUG
+    dev = ["67.174.209.57/32", ]
+    ### 54.86.126.30/24 is a company's IP address range  ### DEBUG
     stg = ["54.86.126.30/24", ]
     prd = ["0.0.0.0/0", ]
   }
@@ -94,8 +93,6 @@ variable "egress_cidr_blocks" {
   description = "CIDR blocks to allow in the security group"
   type        = map(list(string))
   default = {
-    ### 67.174.209.57/32 is bobby's home IP address   ### DEBUG
-    # dev = ["67.174.209.57/32", ]              ### DEBUG
     dev = ["0.0.0.0/0", ]
     stg = ["0.0.0.0/0", ]
     prd = ["0.0.0.0/0", ]
