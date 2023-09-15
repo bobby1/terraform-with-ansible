@@ -33,7 +33,7 @@ To use this code base, AWS cli, Terraform and Ansible are required to be install
   
    * Ansible (https://www.ansible.com/)
 
-   * An OpenSSH key-pair must be available to upload to the new environment
+   * An OpenSSH key-pair must be available to upload to the new environment (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/openssh.html)
 
 ## How to use
 
