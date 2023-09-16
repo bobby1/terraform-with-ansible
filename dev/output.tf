@@ -14,7 +14,7 @@
 ### Developer: 		Bobby Wen, bobby@wen.org
 ### Creation date:	20230913_0946
 ###======================================================================================
-output "region" {
+output "deployment_region" {
   description = "Region name of the deployment"
   value       = var.aws_region
 }
