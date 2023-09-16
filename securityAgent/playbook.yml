@@ -30,13 +30,13 @@
 
     - name: Copy installer file if it does not exist
       copy:
-        src: /home/b1/Documents/development/sandbox/terraform/CloudSoftwareGroup/securityAgent/security_agent_installer_linux_amd64_v1.0.0.sh
+        src: ./security_agent_installer_linux_amd64_v1.0.0.sh
         dest: /opt/csg_security_agent/security_agent_installer.sh
         mode: '0750'
       
     - name: copy config file if it is not current
       copy:
-        src: /home/b1/Documents/development/sandbox/terraform/CloudSoftwareGroup/securityAgent/security_agent_config.conf
+        src: ./security_agent_config.conf
         dest: /opt/csg_security_agent/
         mode: '0640'
 
