@@ -14,6 +14,15 @@
 ### Developer: 		Bobby Wen, bobby@wen.org
 ### Creation date:	20230913_0946
 ###======================================================================================
+output "region" {
+  description = "Region name of the deployment"
+  value       = var.aws_region
+}
+
+output "ec2_instance_id" {
+  description = "EC2 instance ID"
+  value       = aws_instance.ec2_instance[*].id
+}
 
 output "instance_public_ip" {
   description = "Public IP address of the EC2 instance"
