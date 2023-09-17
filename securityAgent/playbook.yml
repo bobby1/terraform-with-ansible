@@ -17,28 +17,34 @@
 ### Creation date:	20230913_2246
 ###====================================================================================== 
 
-- hosts: awsTest 
+- hosts: awsTest
   remote_user: ubuntu
   become: true
   become_method: sudo
 
   tasks:
-    - name: Creates directory if it does not exist
+    - name: Creates directory
       file:
         path: /opt/csg_security_agent
         state: directory
 
-    - name: Copy installer file if it does not exist
+    - name: Copy installer file
       copy:
         src: ./security_agent_installer_linux_amd64_v1.0.0.sh
         dest: /opt/csg_security_agent/security_agent_installer.sh
         mode: '0750'
       
-    - name: copy config file if it is not current
+    - name: Check that the security_agent_config.conf exists
+      stat:
+        path: /opt/csg_security_agent/security_agent_config.conf
+      register: stat_result
+
+    - name: copy config file if it is does not exist
       copy:
         src: ./security_agent_config.conf
         dest: /opt/csg_security_agent/
         mode: '0640'
+      when: not stat_result.stat.exists
 
     - name: Replace configuration file unique token
       replace:
