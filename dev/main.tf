@@ -41,18 +41,6 @@ resource "aws_instance" "ec2_instance" {
   count = var.instance_count[var.environment]
 }
 
-resource "aws_key_pair" "deployer" {
-  key_name   = var.aws_key_name
-  public_key = var.aws_public_key
-  connection {
-    type        = "ssh"
-    host        = self.public_ip
-    user        = "ubuntu"
-    private_key = file("../test_rsa.pem")
-    timeout     = "4m"
-  }
-}
-
 resource "aws_security_group" "main" {
   egress {
     description      = "Cidr Blocks and ports for Egress security"
