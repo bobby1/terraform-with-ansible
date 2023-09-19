@@ -8,13 +8,15 @@ This code is a basic demonstration of ways to create Structured Design Life Cycl
 
   ** In the same manner, dev environments will create two server instances.  Stg environments will create four server instances.  And Prd environments will create six server instances automatically
 
+  ** This is an alternative to terraform workspace and does not require workspace setup
+
 * Secure: The code show examples of how to secure user account and application accessibility based on environments.
   
   ** Secure Shell Protocol (SSH) keys can be pre-configured and installed on the server to allow secure sessions with the all the server instances.
   
   ** Access to the server instances is limited based on the environment.  Dev can be configured to only allow developer access.  Stg can be configured to only allow corporate user access.  Prd can be configured to allow general Internet access.
 
-* Flexible: The code can be customized for individual environments, based on your application needs, for example.  the AWS Machine Images (ami) for each region can be preconfigure, without the need to have project specify them for every region. Additional configuration parameters are already in the code to allow for easy customization.
+* Flexible: The code can be customized for individual environments, based on your application needs, for example.  the AWS Machine Images (ami) for each region can be preconfigure, without the need to have project specify them for every region. Additional configuration parameters are already in the code to allow for easy customization.  
   
 * Auditable: The code creates output and logging where possible.
   ** The public IP and DNS name for servers’ instances created are output in Terraform to allow easy access to the new instance
@@ -81,6 +83,9 @@ for example:
   To check for the application results, ssh to the server instance.  Change directory to /opt/csg_security_agent and inspect the date time of the agent_install_date file.  This will be zero length file.
   
   Alternatively, look in /var/log/syslog for an entry "ansible agent installation SUCCESSFUL" entry.  Logging to a central remote syslog server allows for tracking of the ansible events and date for audit purposes. 
+
+If you no longer need the stack,  you can clean up the by using
+  $ terraform destroy -auto-approve
 
 ## Roadmap
 
