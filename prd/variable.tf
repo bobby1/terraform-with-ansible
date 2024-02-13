@@ -14,7 +14,6 @@
 ### Developer: 		Bobby Wen, bobby@wen.org
 ### Creation date:	20230913_1723
 ###======================================================================================
-
 variable "project_name" {
   description = "product or project name"
   type        = string
@@ -24,7 +23,7 @@ variable "project_name" {
 variable "environment" {
   description = "SDLC Infrastructure environment: THIS SETS THE DEPLOYMENT ENVIRONMENT"
   type        = string
-  default     = "dev"
+  default     = "stg"
 }
 
 variable "aws_region" {
@@ -60,11 +59,6 @@ variable "aws_key_name" {
   default     = "aws_key"
 }
 
-variable "aws_public_key" {
-  description = "pre-configured public key to use in instance"
-  type        = string
-}
-
 variable "instance_count" {
   description = "Number of instances to provision."
   type        = map(number)
@@ -79,10 +73,9 @@ variable "ingress_cidr_blocks" {
   description = "CIDR blocks to allow in the security group"
   type        = map(list(string))
   default = {
-    ### 67.174.209.57/32 is an access IP address DEBUG
-    # dev = ["67.174.209.57/32", ]
-    dev = ["0.0.0.0/0", ]
-    ### 54.86.126.30/24 is a company's IP address range  ### DEBUG
+    ### IP for individual developer's remote address, 67.174.209.57/32 is an access IP address  ### DEBUG
+    dev = ["98.207.22.120/32", "67.174.209.57/32" ]
+    ### example IPs for a company's testing evironement  ### DEBUG
     stg = ["54.86.126.30/24", ]
     prd = ["0.0.0.0/0", ]
   }
