@@ -43,12 +43,15 @@ resource "aws_instance" "ec2_instance" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = var.aws_key_name
-  public_key = var.aws_public_key
+  ### There are many ways of securing secret information, including using a secrets.tfvars file, environmental variables and key management systems.  
+  ### This example reads files outside of the code base, and the files are not checked in as part of the code.
+  ### This allow individual developers to use their own key pair
+  public_key = file("../../../myaws_private_key.txt")
   connection {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("../test_rsa.pem")
+    private_key = file("../../../test_rsa.pem")
     timeout     = "4m"
   }
 }

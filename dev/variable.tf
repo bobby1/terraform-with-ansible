@@ -60,11 +60,6 @@ variable "aws_key_name" {
   default     = "aws_key"
 }
 
-variable "aws_public_key" {
-  description = "pre-configured public key to use in instance"
-  type        = string
-}
-
 variable "instance_count" {
   description = "Number of instances to provision."
   type        = map(number)
