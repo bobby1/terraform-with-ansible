@@ -41,7 +41,7 @@ resource "aws_instance" "ec2_instance" {
 }
 
 resource "aws_key_pair" "deployer" {
-  key_name   = var.aws_key_name
+  key_name = var.aws_key_name
   ### There are many ways of securing secret information, including using a secrets.tfvars file, environmental variables and key management systems.  ### DEBUG
   ### This example reads files outside of the code base, and the files are not checked in as part of the code.  ### DEBUG
   ### This allow individual developers to use their own key pair.  ### DEBUG
