@@ -17,21 +17,18 @@
 variable "project_name" {
   description = "product or project name"
   type        = string
-  default     = "Core tools team"
+  default     = "wenorg"
 }
-
 variable "environment" {
   description = "SDLC Infrastructure environment: THIS SETS THE DEPLOYMENT ENVIRONMENT"
   type        = string
   default     = "dev"
 }
-
 variable "aws_region" {
   description = "AWS region for deployment"
   type        = string
-  default     = "us-east-1"
+  default     = "us-west-1"
 }
-
 variable "aws_instance_id" {
   description = "AWS machine Image ID for deployment"
   type        = map(string)
@@ -42,7 +39,6 @@ variable "aws_instance_id" {
     us-west-2 = "ami-0c65adc9a5c1b5d7c"
   }
 }
-
 variable "aws_instance_type" {
   description = "EC2 instance type"
   type        = map(string)
@@ -52,35 +48,31 @@ variable "aws_instance_type" {
     prd = "t2.large"
   }
 }
-
 variable "aws_key_name" {
   description = "preconfigured key name"
   type        = string
   default     = "aws_key"
 }
-
 variable "instance_count" {
   description = "Number of instances to provision."
   type        = map(number)
   default = {
-    dev = 2
+    dev = 1
     stg = 4
     prd = 6
   }
 }
-
 variable "ingress_cidr_blocks" {
   description = "CIDR blocks to allow in the security group"
   type        = map(list(string))
   default = {
     ### IP for individual developer's remote address, 67.174.209.57/32 is an access IP address  ### DEBUG
-    dev = ["98.207.22.120/32", "67.174.209.57/32"]
+    dev = ["98.207.22.120/32", "67.180.167.206/32"]
     ### example IPs for a company's testing evironement  ### DEBUG
     stg = ["54.86.126.0/24", ]
     prd = ["0.0.0.0/0", ]
   }
 }
-
 variable "egress_cidr_blocks" {
   description = "CIDR blocks to allow in the security group"
   type        = map(list(string))
@@ -90,7 +82,6 @@ variable "egress_cidr_blocks" {
     prd = ["0.0.0.0/0", ]
   }
 }
-
 variable "instance_name" {
   description = "Value of the Name tag for the EC2 instance"
   type        = string

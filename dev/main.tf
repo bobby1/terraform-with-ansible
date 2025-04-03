@@ -18,14 +18,42 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.16"
+      version = "~> 5.0"
     }
   }
 }
 
+# provider "aws" {
+#   region = var.aws_region
+# }
+
+# resource "null_resource" "check_and_create_backend" {
+#   provisioner "local-exec" {
+#     command = <<EOT
+#       aws s3api head-bucket --bucket b1dev-terraform-state || aws s3api create-bucket --bucket b1dev-terraform-state --region us-west-1 --create-bucket-configuration LocationConstraint=us-west-1
+#       aws dynamodb describe-table --table-name devops-ecs-terraform-locking || aws dynamodb create-table --table-name devops-ecs-terraform-locking --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+#     EOT
+#   }
+# }
+# provider "aws" {
+#   region = var.aws_region
+# }
+
 provider "aws" {
   region = var.aws_region
 }
+
+terraform {
+  backend "s3" {
+    bucket         = "b1dev-terraform-state"
+    key            = "dev/ecs/terraform.tfstate"
+    region         = "us-west-1"
+    dynamodb_table = "devops-ecs-terraform-locking"
+    encrypt        = true
+  }
+}
+
+
 
 resource "aws_instance" "ec2_instance" {
   ami                    = var.aws_instance_id[var.aws_region]
